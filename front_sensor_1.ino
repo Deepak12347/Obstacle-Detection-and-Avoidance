@@ -32,6 +32,11 @@ void loop() {
   // Read distance from the front sensor
   frontDistance = measureDistance(FRONT_TRIG_PIN, FRONT_ECHO_PIN);
 
+  // Print obstacle distance to the serial monitor
+  Serial.print("Front Distance: ");
+  Serial.print(frontDistance);
+  Serial.println(" cm");
+
   // Perform obstacle avoidance based on sensor reading
   if (frontDistance > 0 && frontDistance < MAX_DISTANCE) {
     // Obstacle detected in front, adjust pitch for avoidance
@@ -41,11 +46,22 @@ void loop() {
     pitch = 1500;
   }
 
+  // Print pitch value to the serial monitor
+  Serial.print("Pitch: ");
+  Serial.println(pitch);
+
   // Send obstacle distance to Pixhawk
   sendObstacleDistance(frontDistance);
 
   // Send RC override command to control the quadcopter's pitch
   sendRCOverrideCommand(pitch);
+
+  // Print informative messages to the serial monitor
+  Serial.println("Sending MAVLink heartbeat...");
+  Serial.println("Sending obstacle distance to Pixhawk...");
+  Serial.println("Sending RC override command...");
+
+  delay(100); // Add a small delay for stability
 }
 
 // Measure the distance using an ultrasonic sensor
