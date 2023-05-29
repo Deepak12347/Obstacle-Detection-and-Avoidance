@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
 #include "C:\Users\Deepak Sharma\Documents\Arduino\libraries\PixhawkArduinoMAVLink\src\common\mavlink.h"
-
+// Pin definitions for the ultrasonic sensors
 #define FRONT_TRIG_PIN 2
 #define FRONT_ECHO_PIN 3
 #define BACK_TRIG_PIN 4
@@ -10,7 +10,7 @@
 #define RIGHT_TRIG_PIN 8
 #define RIGHT_ECHO_PIN 9
 
-SoftwareSerial mySerial(10, 11); // RX, TX
+SoftwareSerial mySerial(10, 11); // RX, TX for communication with pixhawk
 
 const int MAX_DISTANCE = 70; // Maximum obstacle detection distance in cm
 
