@@ -16,5 +16,9 @@ void setup() {
 }
 
 void loop() {
- 
+  if (mySerial.available()) {
+    char data = mySerial.read();
+    Serial.print("Received data from Pixhawk: ");
+    Serial.println(data);
+  }
 }
