@@ -80,7 +80,7 @@ void sendObstacleDistance(int distance) {
 // Send an RC_CHANNELS_OVERRIDE command to control the quadcopter's pitch
 void sendRCOverrideCommand(int pitch) {
   mavlink_message_t msg;
-  mavlink_msg_rc_channels_override_pack(1, 200, &msg, 1, 0, 0, pitch, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); // Provide the required arguments
+  mavlink_msg_rc_channels_override_pack(1, 200, &msg, 1, 0, pitch, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); // Provide the required arguments
   uint8_t buf[MAVLINK_MAX_PACKET_LEN];
   uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
   mySerial.write(buf, len); // Send the RC override command via serial communication
