@@ -71,7 +71,7 @@ void sendHeartbeat() {
 // Send obstacle distance to Pixhawk
 void sendObstacleDistance(int distance) {
   mavlink_message_t msg;
-  mavlink_msg_obstacle_distance_pack(1, 200, &msg, distance);
+  mavlink_msg_obstacle_distance_pack(1, 200, &msg, 0, 0, NULL, 0, distance, 0); // Provide the required arguments
   uint8_t buf[MAVLINK_MAX_PACKET_LEN];
   uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
   mySerial.write(buf, len); // Send the obstacle distance message via serial communication
@@ -80,7 +80,7 @@ void sendObstacleDistance(int distance) {
 // Send an RC_CHANNELS_OVERRIDE command to control the quadcopter's pitch
 void sendRCOverrideCommand(int pitch) {
   mavlink_message_t msg;
-  mavlink_msg_rc_channels_override_pack(1, 200, &msg, 1, 0, 0, pitch, 0, 0, 0, 0, 0, 0, 0);
+  mavlink_msg_rc_channels_override_pack(1, 200, &msg, 1, 0, 0, pitch, 0, 0, 0, 0, 0, 0, 0, 0); // Provide the required arguments
   uint8_t buf[MAVLINK_MAX_PACKET_LEN];
   uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
   mySerial.write(buf, len); // Send the RC override command via serial communication
