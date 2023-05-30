@@ -1,11 +1,11 @@
 #define TRIG_PIN1 2
-#define ECHO_PIN1 9
-#define TRIG_PIN2 3
-#define ECHO_PIN2 8
-#define TRIG_PIN3 4
+#define ECHO_PIN1 3
+#define TRIG_PIN2 4
+#define ECHO_PIN2 5
+#define TRIG_PIN3 6
 #define ECHO_PIN3 7
-#define TRIG_PIN4 5
-#define ECHO_PIN4 6
+#define TRIG_PIN4 8
+#define ECHO_PIN4 9
 
 void setup() {
   Serial.begin(9600);
@@ -85,4 +85,3 @@ void loop() {
 
   delay(1000);
 }
-
