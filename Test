@@ -1,4 +1,4 @@
-#include <mavlink.h>
+#include "C:\Users\Deepak Sharma\Documents\Arduino\libraries\mavlink\common\mavlink.h"
 
 #define TRIG_PIN 2
 #define ECHO_PIN 3
@@ -27,7 +27,7 @@ void loop() {
 
   // Create a MAVLink obstacle distance message
   mavlink_message_t msg;
-  mavlink_msg_obstacle_distance_pack(1, 200, &msg, 0, 0, NULL, 0, distance, 0); // Provide the required arguments
+  mavlink_msg_hil_state_pack(1, 200, &msg, 0, 0, NULL, 0, distance, 0,0,0,0,0,0,0,0,0,0,0); // Provide the required arguments
 
   // Serialize the MAVLink message
   uint8_t buf[MAVLINK_MAX_PACKET_LEN];
