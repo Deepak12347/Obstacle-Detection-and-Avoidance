@@ -1,40 +1,19 @@
 #include <mavlink.h>
 
-#define TRIG_PIN 2
-#define ECHO_PIN 3
-
 void setup() {
   Serial.begin(57600); // Initialize the serial communication for debugging purposes
-
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
 }
 
 void loop() {
-  long duration, distance;
+  // Example code: Send a MAVLink heartbeat message every second
+  sendHeartbeat();
+  delay(1000);
+}
 
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-  duration = pulseIn(ECHO_PIN, HIGH);
-  distance = (duration / 2) / 29.1;
-
-  Serial.print("Distance: ");
-  Serial.print(distance);
-  Serial.println(" cm");
-
-  // Create a MAVLink distance message
+void sendHeartbeat() {
   mavlink_message_t msg;
-  mavlink_msg_distance_sensor_pack(1, 200, &msg, millis(), 1, MAV_DISTANCE_SENSOR_ULTRASOUND, 0, 0, 0, 0, 0, distance, 0, 0, 0, 0);
-
-  // Serialize the MAVLink message
+  mavlink_msg_heartbeat_pack(1, 200, &msg, MAV_TYPE_GENERIC, MAV_AUTOPILOT_GENERIC, 0, 0, 0);
   uint8_t buf[MAVLINK_MAX_PACKET_LEN];
   uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
-
-  // Send the MAVLink message via Serial
   Serial.write(buf, len);
-
-  delay(1000);
 }
